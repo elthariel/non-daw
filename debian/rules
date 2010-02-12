@@ -1,0 +1,128 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+#
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# Modified to make a template file for a multi-binary package with separated
+# build-arch and build-indep targets  by Bill Allombert 2001
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+
+
+
+
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+
+	cd FL; ./configure --enable-debug=no
+	cd nonlib; ./configure --enable-debug=no
+	cd timeline; ./configure --enable-debug=no --prefix=/usr
+	cd mixer; ./configure --enable-debug=no --prefix=/usr
+
+	touch configure-stamp
+
+
+#Architecture
+build: build-daw build-mixer
+
+build-common: build-common-stamp
+build-common-stamp:
+
+	cd FL; $(MAKE) -j2
+	cd nonlib; $(MAKE) -j2
+	touch $@
+
+build-daw: build-daw-stamp
+build-daw-stamp: configure-stamp build-common
+
+	cd timeline; $(MAKE) -j2
+	touch $@
+
+build-mixer: build-mixer-stamp
+build-mixer-stamp: configure-stamp build-common
+
+	cd mixer; $(MAKE) -j2
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	#rm -f build-arch-stamp build-indep-stamp configure-stamp build-common-stamp
+
+	#$(MAKE) clean
+
+	#dh_clean
+
+#install: install-mixer install-daw
+install-mixer:
+	dh_testdir
+	dh_testroot
+	dh_prep -pnon-mixer
+	dh_installdirs -pnon-mixer
+
+	cd mixer; $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
+
+	dh_install -pnon-mixer
+
+install-daw:
+	dh_testdir
+	dh_testroot
+	dh_prep -pnon-daw
+	dh_installdirs -pnon-daw
+
+	cd timeline; $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
+
+	dh_install -pnon-daw
+
+# Must not depend on anything. This is to be called by
+# binary-daw/binary-mixer
+# in another 'make' thread.
+binary-common:
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
+	dh_installexamples
+#	dh_installmenu
+#	dh_installdebconf
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_python
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_perl
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+# Build dawitecture mixerendant packages using the common target.
+binary-mixer: build-mixer install-mixer
+	$(MAKE) -f debian/rules DH_OPTIONS=-pnon-mixer binary-common
+
+# Build dawitecture dependant packages using the common target.
+binary-daw: build-daw install-daw
+	$(MAKE) -f debian/rules DH_OPTIONS=-pnon-daw binary-common
+
+binary: binary-daw binary-mixer
+.PHONY: build clean binary-mixer binary-daw binary install install-mixer install-daw configure

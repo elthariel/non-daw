@@ -18,6 +18,7 @@
 ###############################################################################
 
 SUBDIRS=nonlib FL timeline mixer
+.PHONY: all clean install config debian
 
 all:
 	@ for dir in $(SUBDIRS); do $(MAKE) -s -C $$dir; done
@@ -30,3 +31,6 @@ install:
 
 config:
 	@ for dir in $(SUBDIRS); do $(MAKE) -s -C $$dir config; done
+
+debian:
+	@ dpkg-buildpackage -b -rfakeroot -i.git

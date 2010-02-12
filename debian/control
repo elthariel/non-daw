@@ -1,0 +1,26 @@
+Source: non-daw
+Section: Sound
+Priority: extra
+Maintainer: Julien Lta BALLET <elthariel@gmail.com>
+Build-Depends: debhelper (>= 7), xutils-dev, liblrdf0-dev, fluid, libjack-dev, libfltk1.1-dev, libsndfile1-dev
+Standards-Version: 3.8.3
+Homepage: http://non-daw.tuxfamily.org/
+
+Package: non-daw
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Non DAW is a powerful and modular Digital Audio Workstation
+ The Non DAW is a powerful, reliable and fast modular Digital Audio
+ Workstation system, released under the GNU General Public License
+ (GPL). It utilizes the JACK Audio Connection Kit for inter-application
+ audio I/O and the FLTK GUI toolkit for a fast and lightweight user
+ interface.
+
+Package: non-mixer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Non Mixer is a powerful, reliable and modular Audio Mixer
+ The Non Mixer is a powerful, reliable and fast modular Digital Audio
+ Mixer, released under the GNU General Public License (GPL). It
+ utilizes the JACK Audio Connection Kit for inter-application audio I/O
+ and the FLTK GUI toolkit for a fast and lightweight user interface.
