@@ -58,11 +58,11 @@ build-mixer-stamp: configure-stamp build-common
 clean:
 	dh_testdir
 	dh_testroot
-	#rm -f build-arch-stamp build-indep-stamp configure-stamp build-common-stamp
+	rm -f build-arch-stamp build-indep-stamp configure-stamp build-common-stamp
 
-	#$(MAKE) clean
+	$(MAKE) clean
 
-	#dh_clean
+	dh_clean
 
 #install: install-mixer install-daw
 install-mixer:
