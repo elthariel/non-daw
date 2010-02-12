@@ -38,9 +38,9 @@ config:
 
 -include .config
 
-export SYSTEM_PATH:=$(prefix)/share/
-export DOCUMENT_PATH:=$(prefix)/share/doc/
-export PIXMAP_PATH:=$(prefix)/share/pixmaps/
+export SYSTEM_PATH:=$(DESTDIR)$(prefix)/share/
+export DOCUMENT_PATH:=$(DESTDIR)$(prefix)/share/doc/
+export PIXMAP_PATH:=$(DESTDIR)$(prefix)/share/pixmaps/
 
 # a bit of a hack to make sure this runs before any rules
 ifneq ($(CALCULATING),yes)
@@ -119,15 +119,17 @@ endif
 
 install: all
 	@ echo -n "Installing..."
-	@ install src/timeline $(prefix)/bin/non-daw
+	@ install -d $(DESTDIR)$(prefix)/bin/
+	@ install -m 755 src/timeline $(DESTDIR)$(prefix)/bin/non-daw
 	@ mkdir -p $(SYSTEM_PATH)/non-daw
 	@ mkdir -p $(PIXMAP_PATH)/non-daw
 	@ cp pixmaps/*.png $(PIXMAP_PATH)/non-daw
+	@ chmod 644 $(PIXMAP_PATH)/non-daw/*
 	@ $(MAKE) -s -C doc install
 	@ echo "$(DONE)"
 ifneq ($(USE_DEBUG),yes)
 	@ echo -n "Stripping..."
-	@ strip $(prefix)/bin/non-daw
+	@ strip $(DESTDIR)$(prefix)/bin/non-daw
 	@ echo "$(DONE)"
 endif
 

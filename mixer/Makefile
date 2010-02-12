@@ -38,9 +38,9 @@ config:
 
 -include .config
 
-export SYSTEM_PATH:=$(prefix)/share/
-export DOCUMENT_PATH:=$(prefix)/share/doc/
-export PIXMAP_PATH:=$(prefix)/share/pixmaps/
+export SYSTEM_PATH:=$(DESTDIR)$(prefix)/share/
+export DOCUMENT_PATH:=$(DESTDIR)$(prefix)/share/doc/
+export PIXMAP_PATH:=$(DESTDIR)$(prefix)/share/pixmaps/
 
 # a bit of a hack to make sure this runs before any rules
 ifneq ($(CALCULATING),yes)
@@ -107,15 +107,17 @@ endif
 
 install: all
 	@ echo -n "Installing..."
-	@ install src/mixer $(prefix)/bin/non-mixer
+	@ install -d $(DESTDIR)$(prefix)/bin/
+	@ install -m 755 src/mixer $(DESTDIR)$(prefix)/bin/non-mixer
 	@ mkdir -p $(SYSTEM_PATH)/non-mixer
 	@ mkdir -p $(PIXMAP_PATH)/non-mixer
 	@ cp pixmaps/*.png $(PIXMAP_PATH)/non-mixer
+	@ chmod 644 $(PIXMAP_PATH)/non-mixer/*
 	@ $(MAKE) -s -C doc install
 	@ echo "$(DONE)"
 ifneq ($(USE_DEBUG),yes)
 	@ echo -n "Stripping..."
-	@ strip $(prefix)/bin/non-mixer
+	@ strip $(DESTDIR)$(prefix)/bin/non-mixer
 	@ echo "$(DONE)"
 endif
 

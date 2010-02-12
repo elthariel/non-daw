@@ -7,7 +7,7 @@ OBJS=$(SRCS:.mu=.html)
 	@ echo Mupping $<...
 	@ mup.wrapper html $<
 
-.PHONY: all clean
+.PHONY: all clean install
 
 all: $(OBJS)
 
@@ -19,6 +19,7 @@ upload: all
 install:
 	@ mkdir -p $(DOCUMENT_PATH)/non-mixer
 	@ cp $(OBJS) *.png mup.css ../../COPYING $(DOCUMENT_PATH)/non-mixer
+	@ chmod 644 $(DOCUMENT_PATH)/non-mixer/*
 #	@ ln -sf $(PIXMAP_PATH)/logo.png $(DOCUMENT_PATH)
 
 clean:
