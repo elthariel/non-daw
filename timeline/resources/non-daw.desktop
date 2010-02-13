@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Non Daw
+Comment= Powerfull, reliable and modular Digital Audio Workstation
+Exec=/usr/bin/non-daw
+Terminal=false
+Type=Application
+Icon=non-sequencer
+Categories=AudioVideo;Audio;

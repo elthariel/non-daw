@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Non Mixer
+Comment= Powerfull, reliable and modular Digital Audio Mixer
+Exec=/usr/bin/non-mixer
+Terminal=false
+Type=Application
+Icon=non-sequencer
+Categories=AudioVideo;Audio;
