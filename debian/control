@@ -8,7 +8,7 @@ Homepage: http://non-daw.tuxfamily.org/
 
 Package: non-daw
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, jackd
 Description: Non DAW is a powerful and modular Digital Audio Workstation
  The Non DAW is a powerful, reliable and fast modular Digital Audio
  Workstation system, released under the GNU General Public License
@@ -18,7 +18,7 @@ Description: Non DAW is a powerful and modular Digital Audio Workstation
 
 Package: non-mixer
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, jackd
 Description: Non Mixer is a powerful, reliable and modular Audio Mixer
  The Non Mixer is a powerful, reliable and fast modular Digital Audio
  Mixer, released under the GNU General Public License (GPL). It

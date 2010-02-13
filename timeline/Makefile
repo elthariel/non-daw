@@ -121,8 +121,11 @@ install: all
 	@ echo -n "Installing..."
 	@ install -d $(DESTDIR)$(prefix)/bin/
 	@ install -m 755 src/timeline $(DESTDIR)$(prefix)/bin/non-daw
-	@ mkdir -p $(SYSTEM_PATH)/non-daw
-	@ mkdir -p $(PIXMAP_PATH)/non-daw
+	@ install -d $(SYSTEM_PATH)/non-daw
+	@ install -d $(PIXMAP_PATH)/non-daw
+	@ install -d $(SYSTEM_PATH)/applications
+	@ install -m 644 pixmaps/icon.png $(SYSTEM_PATH)/pixmaps/non-daw.png
+	@ install -m 644 resources/non-daw.desktop $(SYSTEM_PATH)/applications
 	@ cp pixmaps/*.png $(PIXMAP_PATH)/non-daw
 	@ chmod 644 $(PIXMAP_PATH)/non-daw/*
 	@ $(MAKE) -s -C doc install

@@ -109,8 +109,11 @@ install: all
 	@ echo -n "Installing..."
 	@ install -d $(DESTDIR)$(prefix)/bin/
 	@ install -m 755 src/mixer $(DESTDIR)$(prefix)/bin/non-mixer
-	@ mkdir -p $(SYSTEM_PATH)/non-mixer
-	@ mkdir -p $(PIXMAP_PATH)/non-mixer
+	@ install -d $(SYSTEM_PATH)/non-mixer
+	@ install -d $(PIXMAP_PATH)/non-mixer
+	@ install -d $(SYSTEM_PATH)/applications
+	@ install -m 644 pixmaps/icon.png $(SYSTEM_PATH)/pixmaps/non-mixer.png
+	@ install -m 644 resources/non-mixer.desktop $(SYSTEM_PATH)/applications
 	@ cp pixmaps/*.png $(PIXMAP_PATH)/non-mixer
 	@ chmod 644 $(PIXMAP_PATH)/non-mixer/*
 	@ $(MAKE) -s -C doc install
