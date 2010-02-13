@@ -55,7 +55,7 @@ build-mixer-stamp: configure-stamp build-common
 	cd mixer; $(MAKE) -j2
 	touch $@
 
-clean:
+clean: configure
 	dh_testdir
 	dh_testroot
 	rm -f build-arch-stamp build-indep-stamp configure-stamp build-common-stamp
@@ -123,6 +123,10 @@ binary-mixer: build-mixer install-mixer
 # Build dawitecture dependant packages using the common target.
 binary-daw: build-daw install-daw
 	$(MAKE) -f debian/rules DH_OPTIONS=-pnon-daw binary-common
+
+binary-arch: binary
+
+binary-indep:
 
 binary: binary-daw binary-mixer
 .PHONY: build clean binary-mixer binary-daw binary install install-mixer install-daw configure

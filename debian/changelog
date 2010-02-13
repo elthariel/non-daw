@@ -1,3 +1,10 @@
+non-daw (1.0.0-2) karmic; urgency=low
+
+  * Added some missing rules needed according to lintian.
+  * Fixed misnamed section
+
+ -- Julien Lta BALLET <elthariel@gmail.com>  Fri, 12 Feb 2010 22:42:12 +0100
+
 non-daw (1.0.0-1) karmic; urgency=low
 
   * Initial release.

@@ -18,7 +18,7 @@
 ###############################################################################
 
 SUBDIRS=nonlib FL timeline mixer
-.PHONY: all clean install config debian
+.PHONY: all clean install config debian distclean
 
 all:
 	@ for dir in $(SUBDIRS); do $(MAKE) -s -C $$dir; done
@@ -31,6 +31,10 @@ install:
 
 config:
 	@ for dir in $(SUBDIRS); do $(MAKE) -s -C $$dir config; done
+
+distclean: clean
+	@ echo "Cleaning .deps, .files or .config"
+	@ find -name '.deps' -or -name '.files' -or -name '.config' | xargs rm -f
 
 debian:
 	@ dpkg-buildpackage -b -rfakeroot -i.git

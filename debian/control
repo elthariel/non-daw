@@ -1,5 +1,5 @@
 Source: non-daw
-Section: Sound
+Section: sound
 Priority: extra
 Maintainer: Julien Lta BALLET <elthariel@gmail.com>
 Build-Depends: debhelper (>= 7), xutils-dev, liblrdf0-dev, fluid, libjack-dev, libfltk1.1-dev, libsndfile1-dev
