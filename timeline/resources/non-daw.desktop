@@ -4,5 +4,5 @@ Comment= Powerfull, reliable and modular Digital Audio Workstation
 Exec=/usr/bin/non-daw
 Terminal=false
 Type=Application
-Icon=non-sequencer
+Icon=non-daw
 Categories=AudioVideo;Audio;

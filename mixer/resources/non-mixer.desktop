@@ -4,5 +4,5 @@ Comment= Powerfull, reliable and modular Digital Audio Mixer
 Exec=/usr/bin/non-mixer
 Terminal=false
 Type=Application
-Icon=non-sequencer
+Icon=non-mixer
 Categories=AudioVideo;Audio;
