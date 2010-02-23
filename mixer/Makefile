@@ -38,9 +38,9 @@ config:
 
 -include .config
 
-export SYSTEM_PATH:=$(DESTDIR)$(prefix)/share/
-export DOCUMENT_PATH:=$(DESTDIR)$(prefix)/share/doc/
-export PIXMAP_PATH:=$(DESTDIR)$(prefix)/share/pixmaps/
+export SYSTEM_PATH:=$(prefix)/share/
+export DOCUMENT_PATH:=$(prefix)/share/doc/
+export PIXMAP_PATH:=$(prefix)/share/pixmaps/
 
 # a bit of a hack to make sure this runs before any rules
 ifneq ($(CALCULATING),yes)
@@ -109,13 +109,13 @@ install: all
 	@ echo -n "Installing..."
 	@ install -d $(DESTDIR)$(prefix)/bin/
 	@ install -m 755 src/mixer $(DESTDIR)$(prefix)/bin/non-mixer
-	@ install -d $(SYSTEM_PATH)/non-mixer
-	@ install -d $(PIXMAP_PATH)/non-mixer
-	@ install -d $(SYSTEM_PATH)/applications
-	@ install -m 644 pixmaps/icon.png $(SYSTEM_PATH)/pixmaps/non-mixer.png
-	@ install -m 644 resources/non-mixer.desktop $(SYSTEM_PATH)/applications
-	@ cp pixmaps/*.png $(PIXMAP_PATH)/non-mixer
-	@ chmod 644 $(PIXMAP_PATH)/non-mixer/*
+	@ install -d $(DESTDIR)$(SYSTEM_PATH)/non-mixer
+	@ install -d $(DESTDIR)$(PIXMAP_PATH)/non-mixer
+	@ install -d $(DESTDIR)$(SYSTEM_PATH)/applications
+	@ install -m 644 pixmaps/icon.png $(DESTDIR)$(SYSTEM_PATH)/pixmaps/non-mixer.png
+	@ install -m 644 resources/non-mixer.desktop $(DESTDIR)$(SYSTEM_PATH)/applications
+	@ cp pixmaps/*.png $(DESTDIR)$(PIXMAP_PATH)/non-mixer
+	@ chmod 644 $(DESTDIR)$(PIXMAP_PATH)/non-mixer/*
 	@ $(MAKE) -s -C doc install
 	@ echo "$(DONE)"
 ifneq ($(USE_DEBUG),yes)

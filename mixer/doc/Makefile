@@ -17,9 +17,9 @@ upload: all
 	@ rm -f index.html
 
 install:
-	@ mkdir -p $(DOCUMENT_PATH)/non-mixer
-	@ cp $(OBJS) *.png mup.css ../../COPYING $(DOCUMENT_PATH)/non-mixer
-	@ chmod 644 $(DOCUMENT_PATH)/non-mixer/*
+	@ mkdir -p $(DESTDIR)$(DOCUMENT_PATH)/non-mixer
+	@ cp $(OBJS) *.png mup.css ../../COPYING $(DESTDIR)$(DOCUMENT_PATH)/non-mixer
+	@ chmod 644 $(DESTDIR)$(DOCUMENT_PATH)/non-mixer/*
 #	@ ln -sf $(PIXMAP_PATH)/logo.png $(DOCUMENT_PATH)
 
 clean:

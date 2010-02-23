@@ -38,9 +38,9 @@ config:
 
 -include .config
 
-export SYSTEM_PATH:=$(DESTDIR)$(prefix)/share/
-export DOCUMENT_PATH:=$(DESTDIR)$(prefix)/share/doc/
-export PIXMAP_PATH:=$(DESTDIR)$(prefix)/share/pixmaps/
+export SYSTEM_PATH:=$(prefix)/share/
+export DOCUMENT_PATH:=$(prefix)/share/doc/
+export PIXMAP_PATH:=$(prefix)/share/pixmaps/
 
 # a bit of a hack to make sure this runs before any rules
 ifneq ($(CALCULATING),yes)
@@ -121,13 +121,13 @@ install: all
 	@ echo -n "Installing..."
 	@ install -d $(DESTDIR)$(prefix)/bin/
 	@ install -m 755 src/timeline $(DESTDIR)$(prefix)/bin/non-daw
-	@ install -d $(SYSTEM_PATH)/non-daw
-	@ install -d $(PIXMAP_PATH)/non-daw
-	@ install -d $(SYSTEM_PATH)/applications
-	@ install -m 644 pixmaps/icon.png $(SYSTEM_PATH)/pixmaps/non-daw.png
-	@ install -m 644 resources/non-daw.desktop $(SYSTEM_PATH)/applications
-	@ cp pixmaps/*.png $(PIXMAP_PATH)/non-daw
-	@ chmod 644 $(PIXMAP_PATH)/non-daw/*
+	@ install -d $(DESTDIR)$(SYSTEM_PATH)/non-daw
+	@ install -d $(DESTDIR)$(PIXMAP_PATH)/non-daw
+	@ install -d $(DESTDIR)$(SYSTEM_PATH)/applications
+	@ install -m 644 pixmaps/icon.png $(DESTDIR)$(SYSTEM_PATH)/pixmaps/non-daw.png
+	@ install -m 644 resources/non-daw.desktop $(DESTDIR)$(SYSTEM_PATH)/applications
+	@ cp pixmaps/*.png $(DESTDIR)$(PIXMAP_PATH)/non-daw
+	@ chmod 644 $(DESTDIR)$(PIXMAP_PATH)/non-daw/*
 	@ $(MAKE) -s -C doc install
 	@ echo "$(DONE)"
 ifneq ($(USE_DEBUG),yes)
